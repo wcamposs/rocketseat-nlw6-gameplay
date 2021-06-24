@@ -33,12 +33,16 @@ export function AppointmentCreate() {
   const [openGuildsModal, setOpenGuildsModal] = useState(false);
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
 
-  // function handleCategorySelect(categoryId: string) {
-  //   categoryId === category ? setCategory('') : setCategory(categoryId);
-  // }
+  function handleCategorySelect(categoryId: string) {
+    setCategory(categoryId);
+  }
 
   function handleOpenGuilds() {
     setOpenGuildsModal(true);
+  }
+
+  function handleCloseGuilds() {
+    setOpenGuildsModal(false);
   }
 
   function handleGuildSelect(guildSelected: GuildProps) {
@@ -51,8 +55,8 @@ export function AppointmentCreate() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView>
-        <Background>
+      <Background>
+        <ScrollView>
           <Header title='Agendar partida' />
 
           <Text
@@ -67,7 +71,7 @@ export function AppointmentCreate() {
           <CategorySelect
             hasCheckbox
             categorySelected={category}
-            setCategory={setCategory}
+            setCategory={handleCategorySelect}
           />
 
           <View style={styles.form}>
@@ -91,7 +95,9 @@ export function AppointmentCreate() {
 
             <View style={styles.field}>
               <View>
-                <Text style={styles.label}>Dia e mês</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>
+                  Dia e mês
+                </Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2} />
@@ -101,7 +107,9 @@ export function AppointmentCreate() {
               </View>
 
               <View>
-                <Text style={styles.label}>Hora e minuto</Text>
+                <Text style={[styles.label, { marginBottom: 12 }]}>
+                  Hora e minuto
+                </Text>
 
                 <View style={styles.column}>
                   <SmallInput maxLength={2} />
@@ -127,10 +135,9 @@ export function AppointmentCreate() {
               <Button title='Agendar' />
             </View>
           </View>
-        </Background>
-      </ScrollView>
-
-      <ModalView visible={openGuildsModal}>
+        </ScrollView>
+      </Background>
+      <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
         <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
     </KeyboardAvoidingView>
