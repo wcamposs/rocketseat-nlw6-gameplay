@@ -1,11 +1,7 @@
 // libraries
 import React from "react";
-import { 
-    Image, 
-    Text,
-    ScrollView 
-} from "react-native";
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
+import { Image, Text, ScrollView } from "react-native";
+import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 
 // js
 import { styles } from "./styles";
@@ -17,30 +13,33 @@ import { categories } from "../../utils/categories";
 import { Category } from "../Category";
 
 interface Props {
-    categorySelected: string;
-    setCategory: (categoryId: string) => void;
+  categorySelected: string;
+  setCategory: (categoryId: string) => void;
+  hasCheckbox?: boolean;
 }
 
-export function CategorySelect({ 
-    categorySelected, 
-    setCategory 
+export function CategorySelect({
+  categorySelected,
+  setCategory,
+  hasCheckbox = false,
 }: Props) {
-    return(
-        <ScrollView 
-            style={styles.container}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingRight: 40 }}
-        >
-            {categories.map((category) => (
-                <Category
-                    key={category.id}
-                    title={category.title}
-                    icon={category.icon}
-                    checked={category.id === categorySelected}
-                    onPress={() => setCategory(category.id)}
-                />
-            ))}
-        </ScrollView>
-    );
+  return (
+    <ScrollView
+      style={styles.container}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingRight: 40 }}
+    >
+      {categories.map((category) => (
+        <Category
+          key={category.id}
+          title={category.title}
+          icon={category.icon}
+          checked={category.id === categorySelected}
+          onPress={() => setCategory(category.id)}
+          hasCheckbox={hasCheckbox}
+        />
+      ))}
+    </ScrollView>
+  );
 }

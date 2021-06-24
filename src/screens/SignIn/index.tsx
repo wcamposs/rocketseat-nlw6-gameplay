@@ -1,51 +1,46 @@
 // libraries
-import React from 'react';
-import { 
-    Image,
-    StatusBar,
-    Text, 
-    View 
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import { Image, StatusBar, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 // js
-import { styles } from './styles'
+import { styles } from "./styles";
 
 // assets
-import IllustrationImg from '../../assets/illustration.png';
+import IllustrationImg from "../../assets/illustration.png";
 
 // components
-import { ButtonIcon } from '../../components/ButtonIcon';
+import { Background } from "../../components/Background";
+import { ButtonIcon } from "../../components/ButtonIcon";
 
 export function SignIn() {
-    const navigation = useNavigation();
-    
-    function handleSignIn() {
-        navigation.navigate('Home');
-    }
+  const navigation = useNavigation();
 
-    return (
-        <View style={styles.container}>
-            <Image 
-                source={IllustrationImg} 
-                style={styles.image}
-                resizeMode='stretch'
-            />
+  function handleSignIn() {
+    navigation.navigate("Home");
+  }
 
-            <View style={styles.content}>
-                <Text style={styles.title}>
-                    {`Conecte-se ${'\n'} e organize suas ${'\n'}jogatinas`}
-                </Text>
+  return (
+    <Background>
+      <View style={styles.container}>
+        <Image
+          source={IllustrationImg}
+          style={styles.image}
+          resizeMode="stretch"
+        />
 
-                <Text style={styles.subtitle}>
-                    {`Crie grupos para jogar seus games ${'\n'}favoritos com seus amigos`}
-                </Text>
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            {`Conecte-se ${"\n"} e organize suas ${"\n"}jogatinas`}
+          </Text>
 
-                <ButtonIcon
-                    title="Entrar com Discord"
-                    onPress={handleSignIn}
-                />
-            </View>
+          <Text style={styles.subtitle}>
+            {`Crie grupos para jogar seus games ${"\n"}favoritos com seus amigos`}
+          </Text>
+
+          <ButtonIcon title="Entrar com Discord" onPress={handleSignIn} />
         </View>
-    );
+      </View>
+    </Background>
+  );
 }
