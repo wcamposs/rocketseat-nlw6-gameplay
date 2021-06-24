@@ -1,23 +1,34 @@
 // libraries
-import React from "react";
-import { Image, StatusBar, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Alert, Image, Text, View } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
+
+import * as AuthSession from 'expo-auth-session';
 
 // js
-import { styles } from "./styles";
+import { styles } from './styles';
 
 // assets
-import IllustrationImg from "../../assets/illustration.png";
+import IllustrationImg from '../../assets/illustration.png';
 
 // components
-import { Background } from "../../components/Background";
-import { ButtonIcon } from "../../components/ButtonIcon";
+import { Background } from '../../components/Background';
+import { ButtonIcon } from '../../components/ButtonIcon';
+
+// context
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
+  const { user, signIn } = useAuth();
 
-  function handleSignIn() {
-    navigation.navigate("Home");
+  async function handleSignIn() {
+    // navigation.navigate('Home');
+    try {
+      await signIn();
+    } catch (error) {
+      Alert.alert(error);
+    }
   }
 
   return (
@@ -26,19 +37,19 @@ export function SignIn() {
         <Image
           source={IllustrationImg}
           style={styles.image}
-          resizeMode="stretch"
+          resizeMode='stretch'
         />
 
         <View style={styles.content}>
           <Text style={styles.title}>
-            {`Conecte-se ${"\n"} e organize suas ${"\n"}jogatinas`}
+            {`Conecte-se ${'\n'} e organize suas ${'\n'}jogatinas`}
           </Text>
 
           <Text style={styles.subtitle}>
-            {`Crie grupos para jogar seus games ${"\n"}favoritos com seus amigos`}
+            {`Crie grupos para jogar seus games ${'\n'}favoritos com seus amigos`}
           </Text>
 
-          <ButtonIcon title="Entrar com Discord" onPress={handleSignIn} />
+          <ButtonIcon title='Entrar com Discord' onPress={handleSignIn} />
         </View>
       </View>
     </Background>
